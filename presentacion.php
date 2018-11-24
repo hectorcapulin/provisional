@@ -87,8 +87,14 @@
                                     <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                                         <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Alta</a>
                                         </li>
+
                                         <li role="presentation" class="" id="catli"><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Catálogo</a>
                                         </li>
+
+                                        <li role="presentation" class="" id="coloresli"><a href="#tab_content3" role="tab" id="colores_tab" data-toggle="tab" aria-expanded="false">Colores</a>
+                                        </li>
+
+
 								    </ul>
                                     <div id="myTabContent" class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
@@ -484,6 +490,73 @@
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="colores_tab">
+
+                                            <div class="row">
+                                            	<div class="col-md-12 col-sm-12 col-xs-12">
+
+                                            		<div class="x_panel">
+                                                        <div class="x_title">
+                                                            <h2>Colores</h2>
+                                                             <ul class="nav navbar-right panel_toolbox">
+																<li><a></a></li><li><a></a></li><li><a></a></li><li><a></a></li>
+                                                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                                </li>  
+                                                                
+                                                            </ul>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+														
+                                                        <div class="x_content">
+
+                                                        	
+
+                                                        	<div class="col-md-4 col-sm-4 col-xs-12 form-group">
+																<label  class="control-label col-md-12 col-sm-12 col-xs-12">Producto :</label>
+																<select id ="producto_colores" class="selectpicker form-control formulario"  data-size="15">
+																	<option data-content="<i class='glyphicon glyphicon-leaf'></i>     Selecciona Producto"></option>
+																</select>
+															</div>
+
+
+															<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+																<label for="nombre_color" class="control-label col-md-12 col-sm-12 col-xs-12">Nombre del color:</label>
+																<input id="nombre_color" type="text" class="form-control has-feedback-left">
+																<span class="fa fa-edit form-control-feedback left" aria-hidden="true"></span>
+															</div>
+
+															<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+																<label for="codigo_color" class="control-label col-md-12 col-sm-12 col-xs-12">Código del color :</label>
+																<input id="codigo_color" type="text" class="form-control has-feedback-left">
+																<span class="fa fa-edit form-control-feedback left" aria-hidden="true"></span>
+															</div>
+
+															<div class="clearfix col-md-12 col-sm-12 col-xs-12"><br/></div>
+
+
+															<div class="col-md-10 col-sm-10 col-xs-10" > </div>	
+
+															<div class="col-md-1 col-sm-1 col-xs-6" >															
+																<button id="cancelar_colores" class="btn btn-dark" onclick="Limpia();">Cancelar</button>
+															</div>
+
+
+															<div  id='divguarda_colores' class="col-md-1 col-sm-1 col-xs-6" style="display:block;" >															
+																<button id="guardar_colores" class="btn btn-success" onclick="GuardaColor();">
+																<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Guardar</button>
+															</div>
+
+
+                                                        </div>
+                                                    </div>
+
+                                            	</div>
+                                            </div>
+
+                                        </div>
+
                                     </div>
 									
 									<!--VentanaEmergente-->

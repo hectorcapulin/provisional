@@ -2,6 +2,9 @@
 var version = 0;
 var num_busqueda =0;
 $(document).ready(function(){
+
+	//Llenar productos
+	//Llenar productos
 	$('#menu_toggle').trigger('click');
 	FotoFolio();
 
@@ -531,7 +534,9 @@ function llenarselect()
 			data:{metodo:"ComboProducto"},
 			success: function(data) {
 			$("#producto").append(data);
+			$("#producto_colores").append(data);
 			$("#producto").selectpicker('refresh');
+			$("#producto_colores").selectpicker('refresh');
 			}
     });
 	
@@ -1329,3 +1334,72 @@ $('#profile-tab').click(function () {
 	Limpia();
  }
 });
+
+function GuardaColor()
+{
+
+	var cve_producto = $("#producto_colores").val();
+	var nombre_color = $("#nombre_color").val();
+	var codigo_color = $("#codigo_color").val();
+
+	
+	if( cve_producto ==='' || nombre_color === ''  || codigo_color === ''  )
+	{
+        crearNot("Error","Datos incompletos ,favor de validar información ingresada. ","info","bootstrap3","dark");	
+        return;
+	}
+	
+	if( codigo_color.length != 1  )
+	{
+        crearNot("Error","Longitud del código, favor de escribir solo una letra en el código. ","info","bootstrap3","dark");
+        return;	
+	}
+
+	var colorRepetido = $.ajax({
+										type: "POST",
+										url: "clases/presentacion.php",
+										data:{
+											'metodo':"repetido_color",
+											'producto': cve_producto,
+											'color': nombre_color,
+											'codigo':codigo_color
+										},
+										dataType:"json",
+										async: false
+						}).responseText;
+    console.log("repetido"+colorRepetido);
+    if( colorRepetido == null ) { crearNot("Error","En la consulta de repetidos ","info","bootstrap3","dark");  return; }
+    colorRepetido = $.parseJSON(colorRepetido);
+    if( !colorRepetido[0] ){ crearNot("Error","En la consulta de repetidos, error: "+colorRepetido[1],"info","bootstrap3","dark");   return;}
+    colorRepetido = colorRepetido[1];
+    colorRepetido = colorRepetido[0]["repetido"];
+    if( parseInt(colorRepetido) > 0 ){ crearNot("Error","Color  y/o código repetidos","info","bootstrap3","dark");   return;}
+    
+
+	var registrarColor =    $.ajax({
+										type: "POST",
+										url: "clases/presentacion.php",
+										data:{
+											'metodo':"registrar_color",
+											'producto': cve_producto,
+											'color': nombre_color,
+											'codigo':codigo_color
+										},
+										dataType:"json",
+										async: false
+										}).responseText;
+    console.log("Registro color: "+registrarColor);
+    if(registrarColor == null)
+    {
+      crearNot("Error","No se realizó el registro del color. ","info","bootstrap3","dark"); return;
+    } 
+
+    registrarColor = $.parseJSON(registrarColor);
+    if(!registrarColor[0] )
+    {
+        crearNot("Error","No se realizó el registro del color, error: "+registrarColor[1] ,"info","bootstrap3","dark"); 
+    }
+
+    if( registrarColor[1] ){crearNot("Color registrado","Se ha registrado al color.","info","bootstrap3","success");  Limpia();}
+
+}
